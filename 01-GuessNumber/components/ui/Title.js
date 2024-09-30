@@ -1,20 +1,20 @@
-import { View, Text, StyleSheet } from "react-native";
-import { Colors } from "../../constants/colors";
+import { Text, StyleSheet } from 'react-native';
 
-const Title = ({ children }) => {
+function Title({ children }) {
   return <Text style={styles.title}>{children}</Text>;
-};
+}
 
 export default Title;
+
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "white",
-    textAlign: "center",
-    marginTop: 22,
-    borderWidth: 1,
-    borderColor: "white",
-    padding: 10,
+    fontFamily: 'open-sans-bold',
+    fontSize: 24,
+    // fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    borderWidth: 2,
+    borderColor: 'white',
+    padding: 12,
   },
 });
