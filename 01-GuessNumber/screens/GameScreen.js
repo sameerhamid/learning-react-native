@@ -16,7 +16,7 @@ const generateRandomBetween = (min, max, exclude) => {
 let minBoundary = 1;
 let maxBoundary = 100;
 const GameScreen = ({ userNumber, onGameOver }) => {
-  const initialGuess = generateRandomBetween(1, 100, userNumber);
+  const initialGuess = generateRandomBetween(1, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
   const nextGuessHandler = (dirrection) => {
@@ -55,21 +55,23 @@ const GameScreen = ({ userNumber, onGameOver }) => {
     }
   }, [currentGuess, userNumber, onGameOver]);
   return (
-    <View style={styles.screen}>
-      <Title>Oponent's Guess</Title>
-      <NumberContainer>{currentGuess}</NumberContainer>
-      <View>
-        <Text>Higher or Lower</Text>
+    <View>
+      <View style={styles.screen}>
+        <Title>Oponent's Guess</Title>
+        <NumberContainer>{currentGuess}</NumberContainer>
         <View>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-            -
-          </PrimaryButton>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
-            +
-          </PrimaryButton>
+          <Text>Higher or Lower</Text>
+          <View>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+              -
+            </PrimaryButton>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
+              +
+            </PrimaryButton>
+          </View>
         </View>
+        <View>{/* Log rounds */}</View>
       </View>
-      <View>{/* Log rounds */}</View>
     </View>
   );
 };
