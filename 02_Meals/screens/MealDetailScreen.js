@@ -24,7 +24,7 @@ function MealDetailScreen({ route, navigation }) {
     // if (mealIsFavorite) removeFavorite(mealId);
     // else addFavorite(mealId);
     if (mealIsFavorite) dispatch(removeFavorite({ id: mealId }));
-    else addFavorite({ id: mealId });
+    else dispatch(addFavorite({ id: mealId }));
   }
 
   useLayoutEffect(() => {
