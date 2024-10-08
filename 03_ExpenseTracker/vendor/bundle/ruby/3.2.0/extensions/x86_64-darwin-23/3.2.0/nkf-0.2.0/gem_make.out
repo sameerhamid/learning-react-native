@@ -1,0 +1,19 @@
+current directory: /Users/sonoma/Desktop/sameer/LearningReactNative/ExpenseTracker/vendor/bundle/ruby/3.2.0/gems/nkf-0.2.0/ext/nkf
+/Users/sonoma/.rvm/rubies/ruby-3.2.0/bin/ruby -I /Users/sonoma/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0 extconf.rb
+creating Makefile
+
+current directory: /Users/sonoma/Desktop/sameer/LearningReactNative/ExpenseTracker/vendor/bundle/ruby/3.2.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20241008-12285-rbluii sitelibdir\=./.gem.20241008-12285-rbluii clean
+
+current directory: /Users/sonoma/Desktop/sameer/LearningReactNative/ExpenseTracker/vendor/bundle/ruby/3.2.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20241008-12285-rbluii sitelibdir\=./.gem.20241008-12285-rbluii
+compiling nkf.c
+linking shared-object nkf.bundle
+ld: warning: ignoring duplicate libraries: '-lruby.3.2'
+
+current directory: /Users/sonoma/Desktop/sameer/LearningReactNative/ExpenseTracker/vendor/bundle/ruby/3.2.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20241008-12285-rbluii sitelibdir\=./.gem.20241008-12285-rbluii install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 nkf.bundle ./.gem.20241008-12285-rbluii
+
+current directory: /Users/sonoma/Desktop/sameer/LearningReactNative/ExpenseTracker/vendor/bundle/ruby/3.2.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20241008-12285-rbluii sitelibdir\=./.gem.20241008-12285-rbluii clean

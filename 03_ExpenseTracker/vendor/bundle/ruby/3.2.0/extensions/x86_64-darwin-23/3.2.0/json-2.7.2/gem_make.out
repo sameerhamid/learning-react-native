@@ -1,0 +1,16 @@
+current directory: /Users/sonoma/Desktop/sameer/LearningReactNative/ExpenseTracker/vendor/bundle/ruby/3.2.0/gems/json-2.7.2/ext/json
+/Users/sonoma/.rvm/rubies/ruby-3.2.0/bin/ruby -I /Users/sonoma/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0 extconf.rb
+creating Makefile
+
+current directory: /Users/sonoma/Desktop/sameer/LearningReactNative/ExpenseTracker/vendor/bundle/ruby/3.2.0/gems/json-2.7.2/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20241008-12285-7oytb5 sitelibdir\=./.gem.20241008-12285-7oytb5 clean
+
+current directory: /Users/sonoma/Desktop/sameer/LearningReactNative/ExpenseTracker/vendor/bundle/ruby/3.2.0/gems/json-2.7.2/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20241008-12285-7oytb5 sitelibdir\=./.gem.20241008-12285-7oytb5
+make: Nothing to be done for `all'.
+
+current directory: /Users/sonoma/Desktop/sameer/LearningReactNative/ExpenseTracker/vendor/bundle/ruby/3.2.0/gems/json-2.7.2/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20241008-12285-7oytb5 sitelibdir\=./.gem.20241008-12285-7oytb5 install
+
+current directory: /Users/sonoma/Desktop/sameer/LearningReactNative/ExpenseTracker/vendor/bundle/ruby/3.2.0/gems/json-2.7.2/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20241008-12285-7oytb5 sitelibdir\=./.gem.20241008-12285-7oytb5 clean
