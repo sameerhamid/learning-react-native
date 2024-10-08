@@ -11,6 +11,19 @@ export class Colors {
 
   notification: string;
 
+  primary50?: string;
+  primary100?: string;
+  primary200?: string;
+  primary400?: string;
+  primary500?: string;
+  primary700?: string;
+  primary800?: string;
+  accent500?: string;
+  error50?: string;
+  error500?: string;
+  gray500?: string;
+  gray700?: string;
+
   constructor(
     primary: string,
     background: string,

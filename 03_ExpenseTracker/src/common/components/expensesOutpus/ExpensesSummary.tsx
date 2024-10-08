@@ -1,5 +1,7 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet, ViewStyle } from "react-native";
 import React from "react";
+import { useTheme } from "@react-navigation/native";
+import { Colors } from "../../model/themeModel";
 
 export interface ExpenseType {
   id: string;
@@ -14,6 +16,8 @@ const ExpensesSummary = ({
   periodName: string;
   expenses: ExpenseType[];
 }) => {
+  const theme = useTheme();
+  const compStyles = styles(theme.colors);
   const expensesSum = expenses.reduce((sum, expense) => {
     return sum + expense.amount;
   }, 0);
@@ -25,4 +29,14 @@ const ExpensesSummary = ({
   );
 };
 
+type Styles = {
+  container: ViewStyle;
+};
 export default ExpensesSummary;
+const styles = (colors?: Colors): Styles =>
+  StyleSheet.create<Styles>({
+    container: {
+      padding: 8,
+      backgroundColor: colors?.primary50,
+    },
+  });
