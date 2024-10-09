@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { ExpenseType } from "./ExpensesSummary";
 import { GlobalStyles } from "../../constansts/stylex";
+import { getFromatedDate } from "../../utils/dateUtils";
 
 const ExpenseItem = ({ expense }: { expense: ExpenseType }) => {
   return (
@@ -10,10 +11,10 @@ const ExpenseItem = ({ expense }: { expense: ExpenseType }) => {
         <Text style={[styles.textBase, styles.description]}>
           {expense.description}
         </Text>
-        <Text style={styles.textBase}>{expense.date.toDateString()}</Text>
+        <Text style={styles.textBase}>{getFromatedDate(expense.date)}</Text>
       </View>
       <View style={styles.amountContainer}>
-        <Text style={styles.amount}>{expense.amount}</Text>
+        <Text style={styles.amount}>{expense.amount.toFixed(2)}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -49,12 +50,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   amountContainer: {
-    paddingHorizontal: 12,
-    paddingVertical: 4,
+    padding: 12,
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 4,
+    minWidth: 80,
   },
   amount: {
     color: GlobalStyles.colors.primary500,

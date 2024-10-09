@@ -9,7 +9,7 @@ export const DUMMY_EXPENSES: ExpenseType[] = [
     id: "e1",
     description: "A pair of shoes",
     amount: 99.99,
-    date: new Date("2021-12-19"),
+    date: new Date("2021-12-3"),
   },
   {
     id: "e2",
