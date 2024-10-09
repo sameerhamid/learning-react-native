@@ -37,12 +37,10 @@ const AppNavigation = () => {
             gestureEnabled: true, // Enable gesture-based dismissal
             gestureDirection: "vertical", // Allow dragging down
             animation: "slide_from_bottom",
-
             contentStyle: {
               marginTop: 50, // Set spacing from the top
               borderTopLeftRadius: 20, // Rounded corners for a floating effect
               borderTopRightRadius: 20,
-              backgroundColor: "white", // Set modal background color
             },
           }}
         />

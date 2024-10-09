@@ -4,6 +4,7 @@ import { Images } from "../../common/constansts/Images";
 import { goBack } from "../../common/utils/navigatorUtils";
 import { GlobalStyles } from "../../common/constansts/stylex";
 import useManageExpensesController from "./useManageExpensesController";
+import Button from "../../common/components/ui/Button";
 
 const ManageExpenses = ({ route }: { route: any }) => {
   const editedExpenseId = route.params?.expenseId;
@@ -26,18 +27,22 @@ const ManageExpenses = ({ route }: { route: any }) => {
   const renderDeleteBtn = (): React.ReactElement => {
     return (
       <View style={styles.deletContainer}>
-        {isEditing && (
-          <TouchableOpacity onPress={onDeletePress}>
-            <Image source={Images.DELETE} style={styles.deleteImg} />
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity onPress={onDeletePress}>
+          <Image source={Images.DELETE} style={styles.deleteImg} />
+        </TouchableOpacity>
       </View>
     );
   };
   return (
     <View style={styles.mainContainer}>
       {renderHeader()}
-      <View style={styles.container}>{renderDeleteBtn()}</View>
+      <View style={styles.container}>
+        <View>
+          <Button title={isEditing ? "Update" : "Add"} onPress={() => {}} />
+        </View>
+
+        {isEditing && renderDeleteBtn()}
+      </View>
     </View>
   );
 };
