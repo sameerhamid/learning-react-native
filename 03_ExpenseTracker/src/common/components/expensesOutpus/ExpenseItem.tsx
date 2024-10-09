@@ -4,9 +4,15 @@ import { ExpenseType } from "./ExpensesSummary";
 import { GlobalStyles } from "../../constansts/stylex";
 import { getFromatedDate } from "../../utils/dateUtils";
 
-const ExpenseItem = ({ expense }: { expense: ExpenseType }) => {
+const ExpenseItem = ({
+  expense,
+  onPress,
+}: {
+  expense: ExpenseType;
+  onPress?: () => void;
+}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.topContainer}>
         <Text style={[styles.textBase, styles.description]}>
           {expense.description}

@@ -1,4 +1,5 @@
 export const Images = {
-  HOURGLASS: require('../assets/hourglass.png'),
-  CALANDER: require('../assets/calendar.png'),
+  HOURGLASS: require("../assets/hourglass.png"),
+  CALANDER: require("../assets/calendar.png"),
+  ADD: require("../assets/plus.png"),
 };
