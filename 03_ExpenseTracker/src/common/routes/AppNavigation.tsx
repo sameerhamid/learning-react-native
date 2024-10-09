@@ -5,7 +5,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavScreenTags } from "../constansts/NavScreenTags";
 import BottomTabsNavigatin from "./BottomTabsNavigatin";
 import ManageExpenses from "../../screens/ManageExpenses";
-import { LightTheme } from "../themes/LightTheme";
+import { LightTheme } from "../themes/lightTheme";
+
 const Stack = createStackNavigator();
 const AppNavigation = () => {
   const RootStack = (): React.ReactElement => {

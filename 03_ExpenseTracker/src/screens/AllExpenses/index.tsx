@@ -5,7 +5,11 @@ import ExpensesOutput, {
 } from "../../common/components/expensesOutpus/ExpensesOutput";
 
 const AllExpenses = () => {
-  return <ExpensesOutput expensePeriod="Total" expenses={DUMMY_EXPENSES} />;
+  return (
+    <View>
+      <ExpensesOutput expensePeriod="Total" expenses={DUMMY_EXPENSES} />
+    </View>
+  );
 };
 
 export default AllExpenses;

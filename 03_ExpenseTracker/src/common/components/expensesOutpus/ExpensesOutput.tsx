@@ -23,6 +23,60 @@ export const DUMMY_EXPENSES: ExpenseType[] = [
     amount: 14.99,
     date: new Date("2021-12-17"),
   },
+  {
+    id: "e4",
+    description: "A pair of shoes",
+    amount: 99.99,
+    date: new Date("2021-12-19"),
+  },
+  {
+    id: "e5",
+    description: "A bag",
+    amount: 19.99,
+    date: new Date("2021-12-18"),
+  },
+  {
+    id: "e6",
+    description: "A book",
+    amount: 14.99,
+    date: new Date("2021-12-17"),
+  },
+  {
+    id: "e7",
+    description: "A pair of shoes",
+    amount: 99.99,
+    date: new Date("2021-12-19"),
+  },
+  {
+    id: "e8",
+    description: "A bag",
+    amount: 19.99,
+    date: new Date("2021-12-18"),
+  },
+  {
+    id: "e9",
+    description: "A book",
+    amount: 14.99,
+    date: new Date("2021-12-17"),
+  },
+  {
+    id: "e10",
+    description: "A pair of shoes",
+    amount: 99.99,
+    date: new Date("2021-12-19"),
+  },
+  {
+    id: "e11",
+    description: "A bag",
+    amount: 19.99,
+    date: new Date("2021-12-18"),
+  },
+  {
+    id: "e12",
+    description: "A book",
+    amount: 14.99,
+    date: new Date("2021-12-17"),
+  },
 ];
 const ExpensesOutput = ({
   expenses,
@@ -43,8 +97,11 @@ export default ExpensesOutput;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
+    paddingTop: 24,
+    paddingBottom: 10,
+    paddingHorizontal: 24,
     backgroundColor: GlobalStyles.colors.primary700,
     flex: 1,
+    rowGap: 16,
   },
 });
