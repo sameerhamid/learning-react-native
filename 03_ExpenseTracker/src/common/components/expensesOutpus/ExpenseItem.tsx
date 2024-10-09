@@ -14,10 +14,11 @@ const ExpenseItem = ({
   expense: ExpenseType;
   onPress?: () => void;
 }) => {
-  const navigation = useNavigation();
   const expesnePressHandler = () => {
     if (onPress) onPress();
-    navigate(NavScreenTags.MANAGE_EXPENSES);
+    navigate(NavScreenTags.MANAGE_EXPENSES, {
+      expenseId: expense.id,
+    });
   };
   return (
     <TouchableOpacity style={styles.container} onPress={expesnePressHandler}>

@@ -4,11 +4,15 @@ import { Images } from "../../common/constansts/Images";
 import { goBack } from "../../common/utils/navigatorUtils";
 import { GlobalStyles } from "../../common/constansts/stylex";
 
-const ManageExpenses = () => {
+const ManageExpenses = ({ route }: { route: any }) => {
+  const editedExpenseId = route.params?.expenseId;
+  const isEditing = !!editedExpenseId;
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.headerTxt}>Mange Expense</Text>
+        <Text style={styles.headerTxt}>
+          {isEditing ? "Edit Expense" : "Add Expense"}
+        </Text>
         <TouchableOpacity style={styles.closeBtn} onPress={() => goBack()}>
           <Image source={Images.CROSS} style={styles.crossImg} />
         </TouchableOpacity>
