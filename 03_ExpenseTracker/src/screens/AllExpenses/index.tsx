@@ -8,7 +8,11 @@ const AllExpenses = () => {
   console.log("expenses>>>", expenses.length);
   return (
     <View style={styles.container}>
-      <ExpensesOutput expensePeriod="Total" expenses={expenses} />
+      <ExpensesOutput
+        expensePeriod="Total"
+        expenses={expenses}
+        fallbackTxt="No registered expenses found"
+      />
     </View>
   );
 };

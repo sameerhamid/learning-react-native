@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import ExpensesSummary, { ExpenseType } from "./ExpensesSummary";
 import ExpensesList from "./ExpensesList";
@@ -81,15 +81,20 @@ export const DUMMY_EXPENSES: ExpenseType[] = [
 const ExpensesOutput = ({
   expenses,
   expensePeriod,
+  fallbackTxt,
 }: {
   expenses: ExpenseType[];
   expensePeriod: string;
+  fallbackTxt: string;
 }) => {
-  console.log("in como");
+  let content = <Text style={styles.falbackTxt}>{fallbackTxt}</Text>;
+  if (expenses.length > 0) {
+    content = <ExpensesList expenses={expenses} />;
+  }
   return (
     <View style={styles.container}>
       <ExpensesSummary periodName={expensePeriod} expenses={expenses} />
-      <ExpensesList expenses={expenses} />
+      {content}
     </View>
   );
 };
@@ -104,5 +109,11 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.primary700,
     flex: 1,
     rowGap: 16,
+  },
+  falbackTxt: {
+    color: "white",
+    fontSize: 16,
+    textAlign: "center",
+    marginTop: 30,
   },
 });
