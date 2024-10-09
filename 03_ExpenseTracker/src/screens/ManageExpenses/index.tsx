@@ -9,7 +9,10 @@ import Button from "../../common/components/ui/Button";
 const ManageExpenses = ({ route }: { route: any }) => {
   const editedExpenseId = route.params?.expenseId;
   const isEditing = !!editedExpenseId;
-  const { onDeletePress, onAddOrUpdatePress } = useManageExpensesController();
+  const { onDeletePress, onAddOrUpdatePress } = useManageExpensesController(
+    editedExpenseId,
+    isEditing
+  );
 
   const renderHeader = (): React.ReactElement => {
     return (

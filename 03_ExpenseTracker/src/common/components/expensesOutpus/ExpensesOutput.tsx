@@ -85,10 +85,11 @@ const ExpensesOutput = ({
   expenses: ExpenseType[];
   expensePeriod: string;
 }) => {
+  console.log("in como");
   return (
     <View style={styles.container}>
       <ExpensesSummary periodName={expensePeriod} expenses={expenses} />
-      <ExpensesList expenses={DUMMY_EXPENSES} />
+      <ExpensesList expenses={expenses} />
     </View>
   );
 };

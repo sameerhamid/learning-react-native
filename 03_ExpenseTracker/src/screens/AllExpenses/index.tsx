@@ -1,17 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import ExpensesOutput, {
-  DUMMY_EXPENSES,
-} from "../../common/components/expensesOutpus/ExpensesOutput";
+import React, { useContext } from "react";
+import ExpensesOutput from "../../common/components/expensesOutpus/ExpensesOutput";
+import { ExpensesContext } from "../../common/store/ExpensesContext";
 
 const AllExpenses = () => {
+  const { expenses } = useContext(ExpensesContext);
+  console.log("expenses>>>", expenses.length);
   return (
-    <View>
-      <ExpensesOutput expensePeriod="Total" expenses={DUMMY_EXPENSES} />
+    <View style={styles.container}>
+      <ExpensesOutput expensePeriod="Total" expenses={expenses} />
     </View>
   );
 };
 
 export default AllExpenses;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

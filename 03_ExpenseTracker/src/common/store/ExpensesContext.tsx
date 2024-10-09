@@ -13,7 +13,7 @@ interface ExpenseContextType {
 
 // Create a default value for the context
 const defaultContextValue: ExpenseContextType = {
-  expenses: DUMMY_EXPENSES,
+  expenses: [],
   addExpense: () => {},
   deleteExpense: () => {},
   updateExpense: () => {},
@@ -46,7 +46,7 @@ type ExpenseAction =
   | DeleteExpenseAction;
 
 // Define the initial state for the reducer
-const initialState: ExpenseType[] = [];
+const initialState: ExpenseType[] = DUMMY_EXPENSES;
 
 // Reducer function
 const expensesReducer = (

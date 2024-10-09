@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { ExpenseType } from "./ExpensesSummary";
 import { GlobalStyles } from "../../constansts/stylex";
-import { getFromatedDate } from "../../utils/dateUtils";
+import { getFormattedDate } from "../../utils/dateUtils";
 import { useNavigation } from "@react-navigation/native";
 import { NavScreenTags } from "../../constansts/NavScreenTags";
 import { navigate } from "../../utils/navigatorUtils";
@@ -20,13 +20,15 @@ const ExpenseItem = ({
       expenseId: expense.id,
     });
   };
+
+  console.log("getFormattedDate(expense.date", getFormattedDate(expense.date));
   return (
     <TouchableOpacity style={styles.container} onPress={expesnePressHandler}>
       <View style={styles.topContainer}>
         <Text style={[styles.textBase, styles.description]}>
           {expense.description}
         </Text>
-        <Text style={styles.textBase}>{getFromatedDate(expense.date)}</Text>
+        <Text style={styles.textBase}>{getFormattedDate(expense.date)}</Text>
       </View>
       <View style={styles.amountContainer}>
         <Text style={styles.amount}>{expense.amount.toFixed(2)}</Text>
