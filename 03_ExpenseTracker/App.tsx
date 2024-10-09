@@ -7,18 +7,9 @@ import AppNavigation from "./src/common/routes/AppNavigation";
 import ExpensesProvider from "./src/common/store/ExpensesContext";
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === "dark";
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
     <>
-      <StatusBar
-        barStyle={isDarkMode ? "light-content" : "dark-content"}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
+      <StatusBar />
       <ExpensesProvider>
         <AppNavigation />
       </ExpensesProvider>

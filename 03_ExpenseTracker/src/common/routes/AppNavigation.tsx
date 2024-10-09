@@ -8,9 +8,13 @@ import { LightTheme } from "../themes/lightTheme";
 import { navigationRef } from "../utils/navigatorUtils";
 import { GlobalStyles } from "../constansts/stylex";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useColorScheme } from "react-native";
+import { DarkTheme } from "../themes/darkTheme";
 
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
+  const isDarkMode = useColorScheme() === "dark";
+  const theme = isDarkMode ? DarkTheme : LightTheme;
   const RootStack = (): React.ReactElement => {
     return (
       <Stack.Navigator
@@ -49,7 +53,7 @@ const AppNavigation = () => {
   };
 
   return (
-    <NavigationContainer theme={LightTheme} ref={navigationRef}>
+    <NavigationContainer theme={theme} ref={navigationRef}>
       <RootStack />
     </NavigationContainer>
   );
