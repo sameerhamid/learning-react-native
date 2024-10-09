@@ -25,13 +25,22 @@ const AppNavigation = () => {
           component={BottomTabsNavigatin}
           options={{
             headerShown: false,
-            presentation: "modal",
-            animation: "slide_from_bottom",
           }}
         />
         <Stack.Screen
           name={NavScreenTags.MANAGE_EXPENSES}
           component={ManageExpenses}
+          options={{
+            headerShown: false,
+            presentation: "containedModal",
+            animation: "slide_from_bottom",
+            contentStyle: {
+              marginTop: 50, // Set spacing from the top
+              borderTopLeftRadius: 20, // Rounded corners for a floating effect
+              borderTopRightRadius: 20,
+              backgroundColor: "white", // Set modal background color
+            },
+          }}
         />
       </Stack.Navigator>
     );

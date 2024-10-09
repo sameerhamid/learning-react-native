@@ -16,3 +16,10 @@ export const navigationRef: React.RefObject<
 export const navigate = (name: string, params?: object): void => {
   navigationRef.current?.navigate(name, params);
 };
+
+/**
+ * go back to previous screen
+ */
+export const goBack = (): void => {
+  navigationRef.current?.goBack();
+};
