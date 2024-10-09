@@ -1,10 +1,12 @@
 interface ManageExpenseController {
   onDeletePress: () => void;
+  onAddOrUpdatePress: () => void;
 }
 
 const useManageExpensesController = (): ManageExpenseController => {
   const onDeletePress = (): void => {};
-  return { onDeletePress };
+  const onAddOrUpdatePress = (): void => {};
+  return { onDeletePress, onAddOrUpdatePress };
 };
 
 export default useManageExpensesController;

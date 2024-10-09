@@ -9,7 +9,7 @@ import Button from "../../common/components/ui/Button";
 const ManageExpenses = ({ route }: { route: any }) => {
   const editedExpenseId = route.params?.expenseId;
   const isEditing = !!editedExpenseId;
-  const { onDeletePress } = useManageExpensesController();
+  const { onDeletePress, onAddOrUpdatePress } = useManageExpensesController();
 
   const renderHeader = (): React.ReactElement => {
     return (
@@ -33,14 +33,31 @@ const ManageExpenses = ({ route }: { route: any }) => {
       </View>
     );
   };
+
+  const renderCancelAndAddBtns = (): React.ReactElement => {
+    return (
+      <View style={styles.cancelAddContainer}>
+        <Button
+          mode="flat"
+          buttonStyle={styles.buttons}
+          title="Cancel"
+          onPress={() => {
+            goBack();
+          }}
+        />
+        <Button
+          buttonStyle={styles.buttons}
+          title={isEditing ? "Update" : "Add"}
+          onPress={onAddOrUpdatePress}
+        />
+      </View>
+    );
+  };
   return (
     <View style={styles.mainContainer}>
       {renderHeader()}
       <View style={styles.container}>
-        <View>
-          <Button title={isEditing ? "Update" : "Add"} onPress={() => {}} />
-        </View>
-
+        {renderCancelAndAddBtns()}
         {isEditing && renderDeleteBtn()}
       </View>
     </View>
@@ -60,7 +77,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     paddingBottom: 24,
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
   },
   headerContainer: {
     backgroundColor: GlobalStyles.colors.primary500,
@@ -97,5 +114,13 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     tintColor: GlobalStyles.colors.error500,
+  },
+  cancelAddContainer: {
+    flexDirection: "row",
+    columnGap: 20,
+    justifyContent: "center",
+  },
+  buttons: {
+    minWidth: 120,
   },
 });
