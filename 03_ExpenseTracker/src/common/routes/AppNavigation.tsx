@@ -6,6 +6,7 @@ import { NavScreenTags } from "../constansts/NavScreenTags";
 import BottomTabsNavigatin from "./BottomTabsNavigatin";
 import ManageExpenses from "../../screens/ManageExpenses";
 import { LightTheme } from "../themes/lightTheme";
+import { navigationRef } from "../utils/navigatorUtils";
 
 const Stack = createStackNavigator();
 const AppNavigation = () => {
@@ -26,7 +27,7 @@ const AppNavigation = () => {
   };
 
   return (
-    <NavigationContainer theme={LightTheme}>
+    <NavigationContainer theme={LightTheme} ref={navigationRef}>
       <RootStack />
     </NavigationContainer>
   );

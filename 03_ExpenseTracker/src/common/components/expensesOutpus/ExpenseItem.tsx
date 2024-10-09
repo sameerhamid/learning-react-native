@@ -3,6 +3,9 @@ import React from "react";
 import { ExpenseType } from "./ExpensesSummary";
 import { GlobalStyles } from "../../constansts/stylex";
 import { getFromatedDate } from "../../utils/dateUtils";
+import { useNavigation } from "@react-navigation/native";
+import { NavScreenTags } from "../../constansts/NavScreenTags";
+import { navigate } from "../../utils/navigatorUtils";
 
 const ExpenseItem = ({
   expense,
@@ -11,8 +14,13 @@ const ExpenseItem = ({
   expense: ExpenseType;
   onPress?: () => void;
 }) => {
+  const navigation = useNavigation();
+  const expesnePressHandler = () => {
+    if (onPress) onPress();
+    navigate(NavScreenTags.MANAGE_EXPENSES);
+  };
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={expesnePressHandler}>
       <View style={styles.topContainer}>
         <Text style={[styles.textBase, styles.description]}>
           {expense.description}

@@ -7,11 +7,12 @@ import { GlobalStyles } from "../constansts/stylex";
 import { Image } from "react-native";
 import { Images } from "../constansts/Images";
 import IconButton from "../components/ui/IconButton";
+import { navigate } from "../utils/navigatorUtils";
 const BottomTabs = createBottomTabNavigator();
 function BottomTabsNavigatin() {
   return (
     <BottomTabs.Navigator
-      screenOptions={{
+      screenOptions={() => ({
         headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
         headerTintColor: "white",
         tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
@@ -21,10 +22,10 @@ function BottomTabsNavigatin() {
             image={Images.ADD}
             size={24}
             color={tintColor ?? ""}
-            onPress={() => {}}
+            onPress={() => navigate(NavScreenTags.MANAGE_EXPENSES)}
           />
         ),
-      }}
+      })}
     >
       <BottomTabs.Screen
         name={NavScreenTags.RECENT_EXPENSES}
