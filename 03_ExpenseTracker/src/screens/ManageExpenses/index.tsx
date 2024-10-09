@@ -3,12 +3,15 @@ import React from "react";
 import { Images } from "../../common/constansts/Images";
 import { goBack } from "../../common/utils/navigatorUtils";
 import { GlobalStyles } from "../../common/constansts/stylex";
+import useManageExpensesController from "./useManageExpensesController";
 
 const ManageExpenses = ({ route }: { route: any }) => {
   const editedExpenseId = route.params?.expenseId;
   const isEditing = !!editedExpenseId;
-  return (
-    <View style={styles.container}>
+  const { onDeletePress } = useManageExpensesController();
+
+  const renderHeader = (): React.ReactElement => {
+    return (
       <View style={styles.headerContainer}>
         <Text style={styles.headerTxt}>
           {isEditing ? "Edit Expense" : "Add Expense"}
@@ -17,6 +20,24 @@ const ManageExpenses = ({ route }: { route: any }) => {
           <Image source={Images.CROSS} style={styles.crossImg} />
         </TouchableOpacity>
       </View>
+    );
+  };
+
+  const renderDeleteBtn = (): React.ReactElement => {
+    return (
+      <View style={styles.deletContainer}>
+        {isEditing && (
+          <TouchableOpacity onPress={onDeletePress}>
+            <Image source={Images.DELETE} style={styles.deleteImg} />
+          </TouchableOpacity>
+        )}
+      </View>
+    );
+  };
+  return (
+    <View style={styles.mainContainer}>
+      {renderHeader()}
+      <View style={styles.container}>{renderDeleteBtn()}</View>
     </View>
   );
 };
@@ -24,8 +45,17 @@ const ManageExpenses = ({ route }: { route: any }) => {
 export default ManageExpenses;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+  },
   container: {
     flex: 1,
+    padding: 24,
+    backgroundColor: GlobalStyles.colors.primary800,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    paddingBottom: 24,
+    justifyContent: "space-between",
   },
   headerContainer: {
     backgroundColor: GlobalStyles.colors.primary500,
@@ -50,5 +80,17 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     textAlign: "center",
+  },
+  deletContainer: {
+    marginTop: 16,
+    paddingTop: 8,
+    borderTopWidth: 2,
+    borderTopColor: GlobalStyles.colors.primary200,
+    alignItems: "center",
+  },
+  deleteImg: {
+    width: 40,
+    height: 40,
+    tintColor: GlobalStyles.colors.error500,
   },
 });
