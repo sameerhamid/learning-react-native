@@ -1,8 +1,6 @@
 import React from "react";
+import { StatusBar } from "react-native";
 
-import { StatusBar, useColorScheme } from "react-native";
-
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import AppNavigation from "./src/common/routes/AppNavigation";
 import ExpensesProvider from "./src/common/store/ExpensesContext";
 

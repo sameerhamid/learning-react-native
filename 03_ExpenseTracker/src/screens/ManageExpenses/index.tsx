@@ -5,6 +5,7 @@ import { goBack } from "../../common/utils/navigatorUtils";
 import { GlobalStyles } from "../../common/constansts/stylex";
 import useManageExpensesController from "./useManageExpensesController";
 import Button from "../../common/components/ui/Button";
+import ExpenseForm from "../../common/components/mangeExpense/ExpenseForm";
 
 const ManageExpenses = ({ route }: { route: any }) => {
   const editedExpenseId = route.params?.expenseId;
@@ -60,6 +61,7 @@ const ManageExpenses = ({ route }: { route: any }) => {
     <View style={styles.mainContainer}>
       {renderHeader()}
       <View style={styles.container}>
+        <ExpenseForm />
         {renderCancelAndAddBtns()}
         {isEditing && renderDeleteBtn()}
       </View>
