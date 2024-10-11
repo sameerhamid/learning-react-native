@@ -4,7 +4,7 @@ import { Images } from "../../common/constansts/Images";
 import { goBack } from "../../common/utils/navigatorUtils";
 import { GlobalStyles } from "../../common/constansts/stylex";
 import useManageExpensesController from "./useManageExpensesController";
-import Button from "../../common/components/ui/Button";
+
 import ExpenseForm from "../../common/components/mangeExpense/ExpenseForm";
 
 const ManageExpenses = ({ route }: { route: any }) => {
@@ -38,31 +38,15 @@ const ManageExpenses = ({ route }: { route: any }) => {
     );
   };
 
-  const renderCancelAndAddBtns = (): React.ReactElement => {
-    return (
-      <View style={styles.cancelAddContainer}>
-        <Button
-          mode="flat"
-          buttonStyle={styles.buttons}
-          title="Cancel"
-          onPress={() => {
-            goBack();
-          }}
-        />
-        <Button
-          buttonStyle={styles.buttons}
-          title={isEditing ? "Update" : "Add"}
-          onPress={onAddOrUpdatePress}
-        />
-      </View>
-    );
-  };
   return (
     <View style={styles.mainContainer}>
       {renderHeader()}
       <View style={styles.container}>
-        <ExpenseForm />
-        {renderCancelAndAddBtns()}
+        <ExpenseForm
+          submitButtonText={isEditing ? "Update" : "Add"}
+          onSubmit={onAddOrUpdatePress}
+        />
+
         {isEditing && renderDeleteBtn()}
       </View>
     </View>
@@ -103,7 +87,6 @@ const styles = StyleSheet.create({
     tintColor: "white",
   },
   headerTxt: {
-    // fontWeight: "bold",
     color: "white",
     fontSize: 20,
     textAlign: "center",
@@ -119,13 +102,5 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     tintColor: GlobalStyles.colors.error500,
-  },
-  cancelAddContainer: {
-    flexDirection: "row",
-    columnGap: 20,
-    justifyContent: "center",
-  },
-  buttons: {
-    minWidth: 120,
   },
 });

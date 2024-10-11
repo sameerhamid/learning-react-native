@@ -7,7 +7,7 @@ import { ExpenseType } from "../../common/components/expensesOutpus/ExpensesSumm
 
 interface ManageExpenseController {
   onDeletePress: () => void;
-  onAddOrUpdatePress: () => void;
+  onAddOrUpdatePress: (expense: ExpenseType) => void;
 }
 
 const useManageExpensesController = (
@@ -24,18 +24,17 @@ const useManageExpensesController = (
   };
 
   // add or update expense handler
-  const onAddOrUpdatePress = (): void => {
+  const onAddOrUpdatePress = (expense: ExpenseType): void => {
     const id = `e${expenses.length + 1}`;
-    const date = new Date();
-    const dummyObject: ExpenseType = {
+    const newExpense: ExpenseType = {
+      ...expense,
       id: isEditing ? editedExpenseId : id,
-      description: ` ${isEditing ? editedExpenseId : id} New Expense`,
-      amount: 99.99 + expenses.length,
-      date: new Date(getFormattedDate(date)),
+      // date: new Date(getFormattedDate(expense.date)),
     };
+    console.log("newExpense>>>>", newExpense);
     isEditing
-      ? updateExpense(editedExpenseId, dummyObject)
-      : addExpense(dummyObject);
+      ? updateExpense(editedExpenseId, newExpense)
+      : addExpense(newExpense);
 
     goBack();
   };

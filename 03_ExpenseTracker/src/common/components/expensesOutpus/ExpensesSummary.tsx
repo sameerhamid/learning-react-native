@@ -5,7 +5,7 @@ import { Colors } from "../../model/themeModel";
 import { GlobalStyles } from "../../constansts/stylex";
 
 export interface ExpenseType {
-  id: string;
+  id?: string;
   description: string;
   date: Date;
   amount: number;
