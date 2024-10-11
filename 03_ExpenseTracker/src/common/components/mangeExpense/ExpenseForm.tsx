@@ -34,5 +34,7 @@ const ExpenseForm = () => {
 export default ExpenseForm;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    rowGap: 12,
+  },
 });
