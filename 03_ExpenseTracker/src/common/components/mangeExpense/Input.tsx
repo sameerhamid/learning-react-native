@@ -4,18 +4,20 @@ import {
   TextInput,
   TextInputProps,
   View,
+  ViewStyle,
 } from "react-native";
 import React from "react";
-import { KeyboardEnums } from "../../constansts/enums";
+
 import { GlobalStyles } from "../../constansts/stylex";
 interface InputTypes {
   label: string;
   textInputConfig?: TextInputProps;
+  style?: ViewStyle;
 }
 
-const Input = ({ label, textInputConfig }: InputTypes) => {
+const Input = ({ label, style, textInputConfig }: InputTypes) => {
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, style]}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         {...textInputConfig}
