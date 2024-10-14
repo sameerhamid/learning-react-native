@@ -4,6 +4,7 @@ import { goBack } from "../../common/utils/navigatorUtils";
 import { DUMMY_EXPENSES } from "../../common/components/expensesOutpus/ExpensesOutput";
 import { getFormattedDate } from "../../common/utils/dateUtils";
 import { ExpenseType } from "../../common/components/expensesOutpus/ExpensesSummary";
+import { storeExpense } from "../../common/utils/http";
 
 interface ManageExpenseController {
   onDeletePress: () => void;
@@ -35,9 +36,13 @@ const useManageExpensesController = (
       id: isEditing ? editedExpenseId : id,
     };
 
-    isEditing
-      ? updateExpense(editedExpenseId, newExpense)
-      : addExpense(newExpense);
+    if (isEditing) {
+      updateExpense(editedExpenseId, newExpense);
+    } else {
+      console.log("add expense>>>");
+      storeExpense(newExpense);
+      addExpense(newExpense);
+    }
     goBack();
   };
 

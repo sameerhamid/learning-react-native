@@ -17,7 +17,6 @@ const ExpenseForm = ({
   submitButtonText,
   defaultValue,
 }: ExpenseFormTypes) => {
-  console.log(defaultValue);
   const [inputs, setInputs] = useState({
     amount: {
       value: defaultValue?.amount.toString() ?? "",

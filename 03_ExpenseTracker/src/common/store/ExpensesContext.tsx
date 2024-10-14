@@ -9,6 +9,7 @@ interface ExpenseContextType {
   addExpense: (expense: ExpenseType) => void;
   deleteExpense: (id: string) => void;
   updateExpense: (id: string, expense: ExpenseType) => void;
+  setExpenses: (expenseData: ExpenseType[]) => void;
 }
 
 // Create a default value for the context
@@ -17,6 +18,7 @@ const defaultContextValue: ExpenseContextType = {
   addExpense: () => {},
   deleteExpense: () => {},
   updateExpense: () => {},
+  setExpenses: () => [],
 };
 
 // Create the Expenses context
@@ -39,14 +41,20 @@ type DeleteExpenseAction = {
   payload: string; // Specify the expected payload type for deleting an expense
 };
 
+type SetExpenseAction = {
+  type: ExpenseActionType.SET_EXPENSES;
+  payload: ExpenseType[]; // Specify the expected payload type for deleting an expense
+};
+
 // Define the action type union
 type ExpenseAction =
   | AddExpenseAction
   | UpdateExpenseAction
-  | DeleteExpenseAction;
+  | DeleteExpenseAction
+  | SetExpenseAction;
 
 // Define the initial state for the reducer
-const initialState: ExpenseType[] = DUMMY_EXPENSES;
+const initialState: ExpenseType[] = [];
 
 // Reducer function
 const expensesReducer = (
@@ -55,7 +63,6 @@ const expensesReducer = (
 ) => {
   switch (action.type) {
     case ExpenseActionType.ADD:
-      console.log("action.payload>>>", action.payload);
       return [...state, action.payload]; // Add the new expense
     case ExpenseActionType.UPDATE:
       return state.map((expense) =>
@@ -65,6 +72,8 @@ const expensesReducer = (
       ); // Update the specified expense
     case ExpenseActionType.DELETE:
       return state.filter((expense) => expense.id !== action.payload); // Delete the specified expense
+    case ExpenseActionType.SET_EXPENSES:
+      return [...action.payload];
     default:
       return state; // Return the current state if no action matches
   }
@@ -95,6 +104,12 @@ const ExpensesProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
     });
   };
 
+  const setExpenses = (expenseData: ExpenseType[]) => {
+    dispatch({
+      type: ExpenseActionType.SET_EXPENSES,
+      payload: expenseData,
+    });
+  };
   return (
     <ExpensesContext.Provider
       value={{
@@ -102,6 +117,7 @@ const ExpensesProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
         addExpense,
         deleteExpense,
         updateExpense,
+        setExpenses,
       }}
     >
       {children}

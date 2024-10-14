@@ -2,6 +2,7 @@ export enum ExpenseActionType {
   ADD = "ADD",
   UPDATE = "UPDATE",
   DELETE = "DELETE",
+  SET_EXPENSES = "SET_EXPENSES",
 }
 
 export enum KeyboardEnums {
