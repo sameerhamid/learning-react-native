@@ -34,10 +34,7 @@ const useManageExpensesController = (
       ...expense,
       id: isEditing ? editedExpenseId : id,
     };
-    if (newExpense.amount >= 0) {
-      goBack();
-      return;
-    }
+
     isEditing
       ? updateExpense(editedExpenseId, newExpense)
       : addExpense(newExpense);

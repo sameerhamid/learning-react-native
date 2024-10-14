@@ -13,9 +13,17 @@ interface InputTypes {
   label: string;
   textInputConfig?: TextInputProps;
   style?: ViewStyle;
+  isError?: boolean;
+  errorMessage?: string;
 }
 
-const Input = ({ label, style, textInputConfig }: InputTypes) => {
+const Input = ({
+  label,
+  style,
+  textInputConfig,
+  isError,
+  errorMessage,
+}: InputTypes) => {
   return (
     <View style={[styles.inputContainer, style]}>
       <Text style={styles.label}>{label}</Text>
@@ -24,8 +32,14 @@ const Input = ({ label, style, textInputConfig }: InputTypes) => {
         style={[
           styles.input,
           textInputConfig?.multiline && styles.inputMultiline,
+          {
+            backgroundColor: isError
+              ? GlobalStyles.colors.error50
+              : GlobalStyles.colors.primary100,
+          },
         ]}
       />
+      {isError && <Text style={styles.error}>{errorMessage}</Text>}
     </View>
   );
 };
@@ -51,5 +65,13 @@ const styles = StyleSheet.create({
   inputMultiline: {
     minHeight: 100,
     textAlignVertical: "top",
+  },
+  error: {
+    color: GlobalStyles.colors.error500,
+    fontSize: 12,
+    marginTop: 4,
+    marginLeft: 8,
+    textAlign: "left",
+    textTransform: "capitalize",
   },
 });

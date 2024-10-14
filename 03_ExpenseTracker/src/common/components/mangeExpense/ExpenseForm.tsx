@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import Input from "./Input";
 import Button from "../ui/Button";
 import { goBack } from "../../utils/navigatorUtils";
 import { ExpenseType } from "../expensesOutpus/ExpensesSummary";
 import { getFormattedDate } from "../../utils/dateUtils";
+import { DateErrorMsg } from "../../constansts/enums";
 
 interface ExpenseFormTypes {
   onSubmit: (expense: ExpenseType) => void;
@@ -17,29 +18,66 @@ const ExpenseForm = ({
   defaultValue,
 }: ExpenseFormTypes) => {
   console.log(defaultValue);
-  const [inputValues, setInputValue] = useState({
-    amount: defaultValue?.amount.toString() ?? "",
-    date: defaultValue?.date ? getFormattedDate(defaultValue?.date) : "",
-    description: defaultValue?.description ?? "",
+  const [inputs, setInputs] = useState({
+    amount: {
+      value: defaultValue?.amount.toString() ?? "",
+      isValid: true,
+    },
+    date: {
+      value: defaultValue?.date ? getFormattedDate(defaultValue?.date) : "",
+      isValid: true,
+    },
+    description: {
+      value: defaultValue?.description ?? "",
+      isValid: true,
+    },
   });
 
   //--------- handlers--------
-  const amountChangeHandler = (
+  const inputChangeHandler = (
     name: "amount" | "date" | "description",
-    amount: string
+    value: string
   ) => {
-    setInputValue((prev) => ({
+    setInputs((prev) => ({
       ...prev,
-      [name]: amount,
+      [name]: {
+        value: value,
+        isValid: true,
+      },
     }));
   };
 
   const submitHandler = () => {
     const expenseData: ExpenseType = {
-      amount: +inputValues.amount,
-      date: new Date(inputValues.date),
-      description: inputValues.description,
+      amount: +inputs.amount.value,
+      date: new Date(inputs.date.value),
+      description: inputs.description.value,
     };
+    const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
+    const dateIsValid =
+      expenseData.date.toString() !== DateErrorMsg.INVALID_DATE;
+    const descriptionIsValid = expenseData.description.trim().length > 0;
+
+    if (!amountIsValid || !dateIsValid || !descriptionIsValid) {
+      // Alert.alert("Invalid input", "Please check your input values");
+      setInputs((currenInputs) => {
+        return {
+          amount: {
+            value: currenInputs.amount.value,
+            isValid: amountIsValid,
+          },
+          date: {
+            value: currenInputs.date.value,
+            isValid: dateIsValid,
+          },
+          description: {
+            value: currenInputs.description.value,
+            isValid: descriptionIsValid,
+          },
+        };
+      });
+      return;
+    }
     onSubmit(expenseData);
   };
 
@@ -72,9 +110,11 @@ const ExpenseForm = ({
           label="Amount"
           textInputConfig={{
             keyboardType: "decimal-pad",
-            onChangeText: amountChangeHandler.bind(this, "amount"),
-            value: inputValues.amount,
+            onChangeText: inputChangeHandler.bind(this, "amount"),
+            value: inputs.amount.value,
           }}
+          isError={!inputs.amount.isValid}
+          errorMessage="Please enter valid amount"
         />
         <Input
           style={styles.rowInput}
@@ -82,18 +122,22 @@ const ExpenseForm = ({
           textInputConfig={{
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
-            onChangeText: amountChangeHandler.bind(this, "date"),
-            value: inputValues.date,
+            onChangeText: inputChangeHandler.bind(this, "date"),
+            value: inputs.date.value,
           }}
+          isError={!inputs.date.isValid}
+          errorMessage="Please enter valid date"
         />
       </View>
       <Input
         label="Description"
         textInputConfig={{
           multiline: true,
-          onChangeText: amountChangeHandler.bind(this, "description"),
-          value: inputValues.description,
+          onChangeText: inputChangeHandler.bind(this, "description"),
+          value: inputs.description.value,
         }}
+        isError={!inputs.description.isValid}
+        errorMessage="Please enter valid description"
       />
 
       {renderCancelAndAddBtns()}

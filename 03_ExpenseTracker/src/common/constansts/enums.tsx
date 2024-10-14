@@ -13,3 +13,10 @@ export enum KeyboardEnums {
   PHONE_PAD = "phone-pad",
   URL = "url",
 }
+
+export enum DateErrorMsg {
+  INVALID_DATE = "Invalid Date",
+  INCORRECT_FORMAT = "Incorrect date format",
+  TOO_EARLY = "Date cannot be in the past",
+  TOO_LATE = "Date cannot be in the future",
+}
