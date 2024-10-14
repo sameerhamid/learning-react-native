@@ -4,16 +4,23 @@ import Input from "./Input";
 import Button from "../ui/Button";
 import { goBack } from "../../utils/navigatorUtils";
 import { ExpenseType } from "../expensesOutpus/ExpensesSummary";
+import { getFormattedDate } from "../../utils/dateUtils";
 
 interface ExpenseFormTypes {
   onSubmit: (expense: ExpenseType) => void;
   submitButtonText: string;
+  defaultValue?: ExpenseType;
 }
-const ExpenseForm = ({ onSubmit, submitButtonText }: ExpenseFormTypes) => {
+const ExpenseForm = ({
+  onSubmit,
+  submitButtonText,
+  defaultValue,
+}: ExpenseFormTypes) => {
+  console.log(defaultValue);
   const [inputValues, setInputValue] = useState({
-    amount: "",
-    date: "",
-    description: "",
+    amount: defaultValue?.amount.toString() ?? "",
+    date: defaultValue?.date ? getFormattedDate(defaultValue?.date) : "",
+    description: defaultValue?.description ?? "",
   });
 
   //--------- handlers--------

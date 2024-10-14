@@ -8,6 +8,7 @@ import { ExpenseType } from "../../common/components/expensesOutpus/ExpensesSumm
 interface ManageExpenseController {
   onDeletePress: () => void;
   onAddOrUpdatePress: (expense: ExpenseType) => void;
+  selectedExpenses?: ExpenseType | undefined;
 }
 
 const useManageExpensesController = (
@@ -16,6 +17,9 @@ const useManageExpensesController = (
 ): ManageExpenseController => {
   const { expenses, addExpense, deleteExpense, updateExpense } =
     useContext(ExpensesContext);
+  const selectedExpenses: ExpenseType | undefined = expenses.find(
+    (expense) => expense.id === editedExpenseId
+  );
 
   // delete expense handler
   const onDeletePress = (): void => {
@@ -39,7 +43,7 @@ const useManageExpensesController = (
       : addExpense(newExpense);
   };
 
-  return { onDeletePress, onAddOrUpdatePress };
+  return { onDeletePress, onAddOrUpdatePress, selectedExpenses };
 };
 
 export default useManageExpensesController;

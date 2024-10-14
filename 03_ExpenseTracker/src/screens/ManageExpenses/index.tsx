@@ -10,10 +10,8 @@ import ExpenseForm from "../../common/components/mangeExpense/ExpenseForm";
 const ManageExpenses = ({ route }: { route: any }) => {
   const editedExpenseId = route.params?.expenseId;
   const isEditing = !!editedExpenseId;
-  const { onDeletePress, onAddOrUpdatePress } = useManageExpensesController(
-    editedExpenseId,
-    isEditing
-  );
+  const { onDeletePress, onAddOrUpdatePress, selectedExpenses } =
+    useManageExpensesController(editedExpenseId, isEditing);
 
   const renderHeader = (): React.ReactElement => {
     return (
@@ -45,6 +43,7 @@ const ManageExpenses = ({ route }: { route: any }) => {
         <ExpenseForm
           submitButtonText={isEditing ? "Update" : "Add"}
           onSubmit={onAddOrUpdatePress}
+          defaultValue={selectedExpenses}
         />
 
         {isEditing && renderDeleteBtn()}
