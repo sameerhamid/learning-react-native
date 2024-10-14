@@ -29,14 +29,14 @@ const useManageExpensesController = (
     const newExpense: ExpenseType = {
       ...expense,
       id: isEditing ? editedExpenseId : id,
-      // date: new Date(getFormattedDate(expense.date)),
     };
-    console.log("newExpense>>>>", newExpense);
+    if (newExpense.amount <= 0) {
+      goBack();
+      return;
+    }
     isEditing
       ? updateExpense(editedExpenseId, newExpense)
       : addExpense(newExpense);
-
-    goBack();
   };
 
   return { onDeletePress, onAddOrUpdatePress };

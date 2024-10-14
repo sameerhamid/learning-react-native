@@ -6,7 +6,6 @@ export function getFormattedDate(date: Date): string {
 }
 
 export function getDateMinusDays(date: Date, days: number): Date {
-  console.log(date, days);
   const millisecondsInADay = 86400000; // 1000 ms * 60 seconds * 60 minutes * 24 hours
   return new Date(date.getTime() - days * millisecondsInADay);
 }

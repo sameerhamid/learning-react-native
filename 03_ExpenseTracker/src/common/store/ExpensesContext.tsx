@@ -55,6 +55,7 @@ const expensesReducer = (
 ) => {
   switch (action.type) {
     case ExpenseActionType.ADD:
+      console.log("action.payload>>>", action.payload);
       return [...state, action.payload]; // Add the new expense
     case ExpenseActionType.UPDATE:
       return state.map((expense) =>

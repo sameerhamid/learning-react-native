@@ -5,7 +5,7 @@ import { ExpensesContext } from "../../common/store/ExpensesContext";
 
 const AllExpenses = () => {
   const { expenses } = useContext(ExpensesContext);
-  console.log("expenses>>>", expenses.length);
+
   return (
     <View style={styles.container}>
       <ExpensesOutput

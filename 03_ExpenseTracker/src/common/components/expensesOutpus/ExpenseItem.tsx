@@ -21,7 +21,6 @@ const ExpenseItem = ({
     });
   };
 
-  console.log("getFormattedDate(expense.date", getFormattedDate(expense.date));
   return (
     <TouchableOpacity style={styles.container} onPress={expesnePressHandler}>
       <View style={styles.topContainer}>
