@@ -15,6 +15,8 @@ interface ManageExpenseController {
   onAddOrUpdatePress: (expense: ExpenseType) => void;
   selectedExpenses?: ExpenseType | undefined;
   loading: boolean;
+  error: string | null;
+  handleError: () => void;
 }
 
 const useManageExpensesController = (
@@ -24,6 +26,7 @@ const useManageExpensesController = (
   const { expenses, addExpense, deleteExpense, updateExpense } =
     useContext(ExpensesContext);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const selectedExpenses: ExpenseType | undefined = expenses.find(
     (expense) => expense.id === editedExpenseId
   );
@@ -31,10 +34,15 @@ const useManageExpensesController = (
   // delete expense handler
   const onDeletePress = async (): Promise<void> => {
     setLoading(true);
-    deleteExpense(editedExpenseId);
-    await deleteExpenseBackend(editedExpenseId);
+
+    try {
+      await deleteExpenseBackend(editedExpenseId);
+      deleteExpense(editedExpenseId);
+      goBack();
+    } catch (error) {
+      setError("Couldn't delete expense - please try again");
+    }
     setLoading(false);
-    goBack();
   };
 
   // add or update expense handler
@@ -48,20 +56,41 @@ const useManageExpensesController = (
     if (isEditing) {
       updateExpense(editedExpenseId, newExpense);
 
-      await updateExpenseBackend(editedExpenseId, {
-        amount: newExpense.amount,
-        date: newExpense.date,
-        description: newExpense.description,
-      });
+      try {
+        await updateExpenseBackend(editedExpenseId, {
+          amount: newExpense.amount,
+          date: newExpense.date,
+          description: newExpense.description,
+        });
+        goBack();
+      } catch (error) {
+        setError("Couldn't update expense - please try again");
+      }
       setLoading(false);
     } else {
-      const id = await storeExpense(newExpense);
-      addExpense({ ...expense, id: id });
+      try {
+        const id = await storeExpense(newExpense);
+        addExpense({ ...expense, id: id });
+        goBack();
+        setLoading(false);
+      } catch (error) {
+        setError("Couldn't add expense - please try again");
+      }
     }
-    goBack();
   };
 
-  return { onDeletePress, onAddOrUpdatePress, selectedExpenses, loading };
+  const handleError = (): void => {
+    setError(null);
+  };
+
+  return {
+    onDeletePress,
+    onAddOrUpdatePress,
+    selectedExpenses,
+    loading,
+    error,
+    handleError,
+  };
 };
 
 export default useManageExpensesController;

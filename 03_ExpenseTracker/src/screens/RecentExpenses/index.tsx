@@ -5,9 +5,11 @@ import { ExpensesContext } from "../../common/store/ExpensesContext";
 import { getDateMinusDays } from "../../common/utils/dateUtils";
 import { fetchExpenses } from "../../common/utils/http";
 import LoadingOverlay from "../../common/components/ui/LoadingOverlay";
+import ErrorOverlay from "../../common/components/ui/ErrorOverlay";
 
 const RecentExpenses = () => {
-  const { expenses, loading } = useContext(ExpensesContext);
+  const { expenses, loading, isError, handleIsErrorState } =
+    useContext(ExpensesContext);
 
   const recentExpenses = expenses.filter((expense) => {
     const today = new Date();
@@ -17,6 +19,16 @@ const RecentExpenses = () => {
 
   if (loading) {
     return <LoadingOverlay />;
+  }
+  if (isError && !loading) {
+    return (
+      <ErrorOverlay
+        message="Could not fetch expenses!"
+        onConfirm={() => {
+          handleIsErrorState(false);
+        }}
+      />
+    );
   }
   return (
     <ExpensesOutput

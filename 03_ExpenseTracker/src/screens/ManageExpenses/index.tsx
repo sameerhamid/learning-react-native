@@ -7,12 +7,19 @@ import useManageExpensesController from "./useManageExpensesController";
 
 import ExpenseForm from "../../common/components/mangeExpense/ExpenseForm";
 import LoadingOverlay from "../../common/components/ui/LoadingOverlay";
+import ErrorOverlay from "../../common/components/ui/ErrorOverlay";
 
 const ManageExpenses = ({ route }: { route: any }) => {
   const editedExpenseId = route.params?.expenseId;
   const isEditing = !!editedExpenseId;
-  const { onDeletePress, onAddOrUpdatePress, selectedExpenses, loading } =
-    useManageExpensesController(editedExpenseId, isEditing);
+  const {
+    onDeletePress,
+    onAddOrUpdatePress,
+    selectedExpenses,
+    loading,
+    error,
+    handleError,
+  } = useManageExpensesController(editedExpenseId, isEditing);
 
   const renderHeader = (): React.ReactElement => {
     return (
@@ -41,6 +48,9 @@ const ManageExpenses = ({ route }: { route: any }) => {
     return <LoadingOverlay />;
   }
 
+  if (error && !loading) {
+    return <ErrorOverlay onConfirm={handleError} message={error} />;
+  }
   return (
     <View style={styles.mainContainer}>
       {renderHeader()}

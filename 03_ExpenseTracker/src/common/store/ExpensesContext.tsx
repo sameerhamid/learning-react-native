@@ -19,6 +19,8 @@ interface ExpenseContextType {
   updateExpense: (id: string, expense: ExpenseType) => void;
   setExpenses: (expenseData: ExpenseType[]) => void;
   loading: boolean;
+  isError: boolean;
+  handleIsErrorState: (value: boolean) => void;
 }
 
 // Create a default value for the context
@@ -29,6 +31,8 @@ const defaultContextValue: ExpenseContextType = {
   updateExpense: () => {},
   setExpenses: () => [],
   loading: false,
+  isError: false,
+  handleIsErrorState: () => {},
 };
 
 // Create the Expenses context
@@ -93,7 +97,7 @@ const expensesReducer = (
 const ExpensesProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [expensesState, dispatch] = useReducer(expensesReducer, initialState); // Pass the initial state to useReducer
   const [loading, setLoading] = useState(false);
-
+  const [isError, setIsError] = useState(false);
   const addExpense = useCallback(
     (expense: ExpenseType) => {
       dispatch({
@@ -131,15 +135,21 @@ const ExpensesProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
     });
   };
 
+  const handleIsErrorState = (value: boolean) => {
+    setIsError(false);
+  };
   useEffect(() => {
     console.log("callign>>>>");
     // Function to fetch expenses
     async function getExpenses() {
       setLoading(true);
-      const expenses = await fetchExpenses();
-      console.log("recent expenses>>>", expenses);
+      try {
+        const expenses = await fetchExpenses();
+        setExpenses(expenses);
+      } catch (error) {
+        setIsError(true);
+      }
       setLoading(false);
-      setExpenses(expenses);
     }
     getExpenses();
   }, []); // useEffect will run when the navigation object changes
@@ -153,6 +163,8 @@ const ExpensesProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
         updateExpense,
         setExpenses,
         loading,
+        isError,
+        handleIsErrorState,
       }}
     >
       {children}
