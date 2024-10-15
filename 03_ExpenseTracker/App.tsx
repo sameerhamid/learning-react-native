@@ -8,7 +8,9 @@ function App(): React.JSX.Element {
   return (
     <>
       <StatusBar />
-      <AppNavigation />
+      <ExpensesProvider>
+        <AppNavigation />
+      </ExpensesProvider>
     </>
   );
 }

@@ -10,7 +10,6 @@ import { GlobalStyles } from "../constansts/stylex";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useColorScheme } from "react-native";
 import { DarkTheme } from "../themes/darkTheme";
-import ExpensesProvider from "../store/ExpensesContext";
 
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
@@ -55,9 +54,7 @@ const AppNavigation = () => {
 
   return (
     <NavigationContainer theme={theme} ref={navigationRef}>
-      <ExpensesProvider>
-        <RootStack />
-      </ExpensesProvider>
+      <RootStack />
     </NavigationContainer>
   );
 };
