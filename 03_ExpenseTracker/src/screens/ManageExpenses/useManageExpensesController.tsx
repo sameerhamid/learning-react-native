@@ -4,7 +4,11 @@ import { goBack } from "../../common/utils/navigatorUtils";
 import { DUMMY_EXPENSES } from "../../common/components/expensesOutpus/ExpensesOutput";
 import { getFormattedDate } from "../../common/utils/dateUtils";
 import { ExpenseType } from "../../common/components/expensesOutpus/ExpensesSummary";
-import { storeExpense } from "../../common/utils/http";
+import {
+  deleteExpenseBackend,
+  storeExpense,
+  updateExpenseBackend,
+} from "../../common/utils/http";
 
 interface ManageExpenseController {
   onDeletePress: () => void;
@@ -23,13 +27,14 @@ const useManageExpensesController = (
   );
 
   // delete expense handler
-  const onDeletePress = (): void => {
+  const onDeletePress = async (): Promise<void> => {
     deleteExpense(editedExpenseId);
+    deleteExpenseBackend(editedExpenseId);
     goBack();
   };
 
   // add or update expense handler
-  const onAddOrUpdatePress = (expense: ExpenseType): void => {
+  const onAddOrUpdatePress = async (expense: ExpenseType): Promise<void> => {
     const id = `e${expenses.length + 1}`;
     const newExpense: ExpenseType = {
       ...expense,
@@ -38,6 +43,11 @@ const useManageExpensesController = (
 
     if (isEditing) {
       updateExpense(editedExpenseId, newExpense);
+      updateExpenseBackend(editedExpenseId, {
+        amount: newExpense.amount,
+        date: newExpense.date,
+        description: newExpense.description,
+      });
     } else {
       console.log("add expense>>>");
       storeExpense(newExpense);
