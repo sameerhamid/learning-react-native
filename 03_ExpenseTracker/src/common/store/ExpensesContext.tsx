@@ -1,7 +1,15 @@
-import React, { createContext, useReducer, PropsWithChildren } from "react";
+import React, {
+  createContext,
+  useReducer,
+  PropsWithChildren,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { ExpenseType } from "../components/expensesOutpus/ExpensesSummary";
 import { ExpenseActionType } from "../constansts/enums";
-import { DUMMY_EXPENSES } from "../components/expensesOutpus/ExpensesOutput";
+
+import { fetchExpenses } from "../utils/http";
 
 // Define the context type
 interface ExpenseContextType {
@@ -10,6 +18,7 @@ interface ExpenseContextType {
   deleteExpense: (id: string) => void;
   updateExpense: (id: string, expense: ExpenseType) => void;
   setExpenses: (expenseData: ExpenseType[]) => void;
+  loading: boolean;
 }
 
 // Create a default value for the context
@@ -19,6 +28,7 @@ const defaultContextValue: ExpenseContextType = {
   deleteExpense: () => {},
   updateExpense: () => {},
   setExpenses: () => [],
+  loading: false,
 };
 
 // Create the Expenses context
@@ -82,27 +92,37 @@ const expensesReducer = (
 // Define a provider component that accepts `children` as a prop
 const ExpensesProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [expensesState, dispatch] = useReducer(expensesReducer, initialState); // Pass the initial state to useReducer
+  const [loading, setLoading] = useState(false);
 
-  const addExpense = (expense: ExpenseType) => {
-    dispatch({
-      type: ExpenseActionType.ADD,
-      payload: expense,
-    });
-  };
+  const addExpense = useCallback(
+    (expense: ExpenseType) => {
+      dispatch({
+        type: ExpenseActionType.ADD,
+        payload: expense,
+      });
+    },
+    [dispatch] // Only recreate if dispatch changes
+  );
 
-  const deleteExpense = (id: string) => {
-    dispatch({
-      type: ExpenseActionType.DELETE,
-      payload: id,
-    });
-  };
+  const deleteExpense = useCallback(
+    (id: string) => {
+      dispatch({
+        type: ExpenseActionType.DELETE,
+        payload: id,
+      });
+    },
+    [dispatch] // Only recreate if dispatch changes
+  );
 
-  const updateExpense = (id: string, updatedExpense: ExpenseType) => {
-    dispatch({
-      type: ExpenseActionType.UPDATE,
-      payload: { id, data: updatedExpense },
-    });
-  };
+  const updateExpense = useCallback(
+    (id: string, updatedExpense: ExpenseType) => {
+      dispatch({
+        type: ExpenseActionType.UPDATE,
+        payload: { id, data: updatedExpense },
+      });
+    },
+    [dispatch] // Only recreate if dispatch changes
+  );
 
   const setExpenses = (expenseData: ExpenseType[]) => {
     dispatch({
@@ -110,6 +130,20 @@ const ExpensesProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
       payload: expenseData,
     });
   };
+
+  useEffect(() => {
+    console.log("callign>>>>");
+    // Function to fetch expenses
+    async function getExpenses() {
+      setLoading(true);
+      const expenses = await fetchExpenses();
+      console.log("recent expenses>>>", expenses);
+      setLoading(false);
+      setExpenses(expenses);
+    }
+    getExpenses();
+  }, []); // useEffect will run when the navigation object changes
+
   return (
     <ExpensesContext.Provider
       value={{
@@ -118,6 +152,7 @@ const ExpensesProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
         deleteExpense,
         updateExpense,
         setExpenses,
+        loading,
       }}
     >
       {children}

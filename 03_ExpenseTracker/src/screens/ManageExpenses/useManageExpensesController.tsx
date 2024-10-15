@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ExpensesContext } from "../../common/store/ExpensesContext";
 import { goBack } from "../../common/utils/navigatorUtils";
 import { DUMMY_EXPENSES } from "../../common/components/expensesOutpus/ExpensesOutput";
@@ -14,6 +14,7 @@ interface ManageExpenseController {
   onDeletePress: () => void;
   onAddOrUpdatePress: (expense: ExpenseType) => void;
   selectedExpenses?: ExpenseType | undefined;
+  loading: boolean;
 }
 
 const useManageExpensesController = (
@@ -22,41 +23,45 @@ const useManageExpensesController = (
 ): ManageExpenseController => {
   const { expenses, addExpense, deleteExpense, updateExpense } =
     useContext(ExpensesContext);
+  const [loading, setLoading] = useState<boolean>(false);
   const selectedExpenses: ExpenseType | undefined = expenses.find(
     (expense) => expense.id === editedExpenseId
   );
 
   // delete expense handler
   const onDeletePress = async (): Promise<void> => {
+    setLoading(true);
     deleteExpense(editedExpenseId);
-    deleteExpenseBackend(editedExpenseId);
+    await deleteExpenseBackend(editedExpenseId);
+    setLoading(false);
     goBack();
   };
 
   // add or update expense handler
   const onAddOrUpdatePress = async (expense: ExpenseType): Promise<void> => {
-    const id = `e${expenses.length + 1}`;
+    setLoading(true);
+
     const newExpense: ExpenseType = {
       ...expense,
-      id: isEditing ? editedExpenseId : id,
     };
 
     if (isEditing) {
       updateExpense(editedExpenseId, newExpense);
-      updateExpenseBackend(editedExpenseId, {
+
+      await updateExpenseBackend(editedExpenseId, {
         amount: newExpense.amount,
         date: newExpense.date,
         description: newExpense.description,
       });
+      setLoading(false);
     } else {
-      console.log("add expense>>>");
-      storeExpense(newExpense);
-      addExpense(newExpense);
+      const id = await storeExpense(newExpense);
+      addExpense({ ...expense, id: id });
     }
     goBack();
   };
 
-  return { onDeletePress, onAddOrUpdatePress, selectedExpenses };
+  return { onDeletePress, onAddOrUpdatePress, selectedExpenses, loading };
 };
 
 export default useManageExpensesController;

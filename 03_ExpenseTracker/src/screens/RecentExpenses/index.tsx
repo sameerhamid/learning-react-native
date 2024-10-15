@@ -4,9 +4,10 @@ import ExpensesOutput from "../../common/components/expensesOutpus/ExpensesOutpu
 import { ExpensesContext } from "../../common/store/ExpensesContext";
 import { getDateMinusDays } from "../../common/utils/dateUtils";
 import { fetchExpenses } from "../../common/utils/http";
+import LoadingOverlay from "../../common/components/ui/LoadingOverlay";
 
 const RecentExpenses = () => {
-  const { expenses, setExpenses } = useContext(ExpensesContext);
+  const { expenses, loading } = useContext(ExpensesContext);
 
   const recentExpenses = expenses.filter((expense) => {
     const today = new Date();
@@ -14,14 +15,9 @@ const RecentExpenses = () => {
     return expense.date >= date7DaysAgo;
   });
 
-  useEffect(() => {
-    async function getExpenses() {
-      const expenses = await fetchExpenses();
-      console.log("expense>>>", expenses);
-      setExpenses(expenses);
-    }
-    getExpenses();
-  }, []);
+  if (loading) {
+    return <LoadingOverlay />;
+  }
   return (
     <ExpensesOutput
       expensePeriod="Last 7 days"

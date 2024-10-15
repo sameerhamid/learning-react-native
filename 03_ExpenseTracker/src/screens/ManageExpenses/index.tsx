@@ -6,11 +6,12 @@ import { GlobalStyles } from "../../common/constansts/stylex";
 import useManageExpensesController from "./useManageExpensesController";
 
 import ExpenseForm from "../../common/components/mangeExpense/ExpenseForm";
+import LoadingOverlay from "../../common/components/ui/LoadingOverlay";
 
 const ManageExpenses = ({ route }: { route: any }) => {
   const editedExpenseId = route.params?.expenseId;
   const isEditing = !!editedExpenseId;
-  const { onDeletePress, onAddOrUpdatePress, selectedExpenses } =
+  const { onDeletePress, onAddOrUpdatePress, selectedExpenses, loading } =
     useManageExpensesController(editedExpenseId, isEditing);
 
   const renderHeader = (): React.ReactElement => {
@@ -35,6 +36,10 @@ const ManageExpenses = ({ route }: { route: any }) => {
       </View>
     );
   };
+
+  if (loading) {
+    return <LoadingOverlay />;
+  }
 
   return (
     <View style={styles.mainContainer}>
