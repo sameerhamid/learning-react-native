@@ -21,14 +21,15 @@ function SignupScreen() {
     setLoading(true);
     try {
       const token = await createUser(email, password);
+      setLoading(false);
       authenticate(token);
     } catch (error) {
       Alert.alert(
         'Authentication failed',
         'Could not create user. Please check your credentials and try again later',
       );
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   if (loading) {

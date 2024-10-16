@@ -20,15 +20,15 @@ function LoginScreen() {
     setLoading(true);
     try {
       const token = await loginUser(email, password);
+      setLoading(false);
       authenticate(token);
     } catch (error) {
       Alert.alert(
         'Authentication failed',
         'Could not log you in. Please check your credentials and try again later',
       );
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   if (loading) {
