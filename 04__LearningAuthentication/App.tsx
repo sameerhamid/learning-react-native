@@ -2,12 +2,13 @@ import React from 'react';
 
 import {SafeAreaView, StyleSheet} from 'react-native';
 import AppNavigation from './src/common/routes/AppNavigation';
+import AuthContextProvider from './src/common/store/auth-context';
 
 function App(): React.JSX.Element {
   return (
-    <SafeAreaView style={styles.container}>
+    <AuthContextProvider>
       <AppNavigation />
-    </SafeAreaView>
+    </AuthContextProvider>
   );
 }
 
