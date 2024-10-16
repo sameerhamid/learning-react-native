@@ -1,15 +1,25 @@
-import {Pressable, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Image,
+  ImageProps,
+  ImageSourcePropType,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 
 interface IconButtonTypes {
-  icon: string;
   color: string;
   size: number;
   onPress: () => void;
+  imageSrc: ImageSourcePropType;
 }
-function IconButton({icon, color, size, onPress}: IconButtonTypes) {
+function IconButton({imageSrc, color, size, onPress}: IconButtonTypes) {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      {/* <Ionicons name={icon} color={color} size={size} /> */}
+      <Image
+        source={imageSrc}
+        style={[styles.image, {tintColor: color, height: size, width: size}]}
+      />
     </TouchableOpacity>
   );
 }
@@ -21,4 +31,5 @@ const styles = StyleSheet.create({
     margin: 8,
     borderRadius: 20,
   },
+  image: {},
 });
