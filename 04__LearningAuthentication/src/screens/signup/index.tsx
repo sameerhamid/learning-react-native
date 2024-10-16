@@ -2,6 +2,7 @@ import {useState} from 'react';
 import AuthContent from '../../common/components/Auth/AuthContent';
 import {createUser} from '../../common/components/utils/http';
 import LoadingOverlay from '../../common/components/ui/LoadingOverlay';
+import {Alert} from 'react-native';
 
 function SignupScreen() {
   // states
@@ -16,7 +17,14 @@ function SignupScreen() {
     password: string;
   }) => {
     setLoading(true);
-    await createUser(email, password);
+    try {
+      createUser(email, password);
+    } catch (error) {
+      Alert.alert(
+        'Authentication failed',
+        'Could not create user. Please check your credentials and try again later',
+      );
+    }
     setLoading(false);
   };
 

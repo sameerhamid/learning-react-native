@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {Alert, Text, View} from 'react-native';
 import AuthContent from '../../common/components/Auth/AuthContent';
 import {useState} from 'react';
 import {loginUser} from '../../common/components/utils/http';
@@ -15,7 +15,17 @@ function LoginScreen() {
     email: string;
     password: string;
   }) => {
-    loginUser(email, password);
+    setLoading(true);
+    try {
+      loginUser(email, password);
+    } catch (error) {
+      Alert.alert(
+        'Authentication failed',
+        'Could not log you in. Please check your credentials and try again later',
+      );
+    }
+
+    setLoading(false);
   };
 
   if (loading) {

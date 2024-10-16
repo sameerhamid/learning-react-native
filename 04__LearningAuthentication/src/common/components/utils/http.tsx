@@ -12,6 +12,7 @@ async function authenticate(mode: AuthMode, email: string, password: string) {
     password,
     returnSecureToken: true,
   });
+  console.log('response>>>', response.data.idToken);
 }
 export async function createUser(email: string, password: string) {
   const response = await authenticate(AuthMode.SIGN_UP, email, password);
