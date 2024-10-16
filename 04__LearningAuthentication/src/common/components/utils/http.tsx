@@ -26,10 +26,6 @@ export async function createUser(
   return token;
 }
 
-export async function loginUser(
-  email: string,
-  password: string,
-): Promise<string> {
-  const token = await authenticate(AuthMode.SIGN_IN, email, password);
-  return token;
+export function loginUser(email: string, password: string) {
+  return authenticate(AuthMode.SIGN_IN, email, password);
 }

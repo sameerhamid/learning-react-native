@@ -1,14 +1,16 @@
 import {Alert, Text, View} from 'react-native';
 import AuthContent from '../../common/components/Auth/AuthContent';
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import {loginUser} from '../../common/components/utils/http';
 import LoadingOverlay from '../../common/components/ui/LoadingOverlay';
+import {AuthContext} from '../../common/store/auth-context';
 
 function LoginScreen() {
   const [loading, setLoading] = useState<boolean>(false);
+  const {authenticate} = useContext(AuthContext);
 
   // login handler
-  const loginHandler = ({
+  const loginHandler = async ({
     email,
     password,
   }: {
@@ -17,7 +19,8 @@ function LoginScreen() {
   }) => {
     setLoading(true);
     try {
-      loginUser(email, password);
+      const token = await loginUser(email, password);
+      authenticate(token);
     } catch (error) {
       Alert.alert(
         'Authentication failed',

@@ -20,8 +20,8 @@ function SignupScreen() {
   }) => {
     setLoading(true);
     try {
-      createUser(email, password);
-      authenticate('');
+      const token = await createUser(email, password);
+      authenticate(token);
     } catch (error) {
       Alert.alert(
         'Authentication failed',
