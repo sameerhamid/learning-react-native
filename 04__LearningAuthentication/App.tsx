@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {SafeAreaView, StyleSheet} from 'react-native';
-import AppNavigation from './src/common/components/routes/AppNavigation';
+import AppNavigation from './src/common/routes/AppNavigation';
 
 function App(): React.JSX.Element {
   return (

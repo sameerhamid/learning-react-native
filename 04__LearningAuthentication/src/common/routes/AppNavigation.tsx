@@ -1,11 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Colors} from '../../constants/styles';
-import WelcomeScreen from '../../../screens/welcome';
-import {NavScreenTags} from '../../constants/NavScreenTags';
-import {navigationRef} from '../utils/navigatorUtils';
-import LoginScreen from '../../../screens/login';
-import SignupScreen from '../../../screens/signup';
+import {navigationRef} from '../components/utils/navigatorUtils';
+import {Colors} from '../constants/styles';
+import LoginScreen from '../../screens/login';
+import SignupScreen from '../../screens/signup';
+import WelcomeScreen from '../../screens/welcome';
+import {NavScreenTags} from '../constants/NavScreenTags';
 
 const Stack = createNativeStackNavigator();
 

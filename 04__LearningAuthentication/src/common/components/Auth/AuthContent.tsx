@@ -2,8 +2,8 @@ import {useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 
 import AuthForm from './AuthForm';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import FlatButton from '../ui/FlatButton';
+import {Colors} from '../../constants/styles';
 
 interface AuthContentTypes {
   isLogin?: boolean;
