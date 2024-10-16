@@ -1,6 +1,7 @@
 import {
   NavigationContainerRefWithCurrent,
   ParamListBase,
+  StackActions,
 } from '@react-navigation/native';
 import React from 'react';
 
@@ -22,4 +23,11 @@ export const navigate = (name: string, params?: object): void => {
  */
 export const goBack = (): void => {
   navigationRef.current?.goBack();
+};
+/**
+ * replace current screen with new one
+ * @param routeName
+ */
+export const replace = (routeName: string): void => {
+  navigationRef.current?.dispatch(StackActions.replace(routeName));
 };

@@ -4,6 +4,8 @@ import {Alert, StyleSheet, View} from 'react-native';
 import AuthForm from './AuthForm';
 import FlatButton from '../ui/FlatButton';
 import {Colors} from '../../constants/styles';
+import {replace} from '../utils/navigatorUtils';
+import {NavScreenTags} from '../../constants/NavScreenTags';
 
 interface AuthContentTypes {
   isLogin?: boolean;
@@ -31,7 +33,7 @@ function AuthContent({isLogin, onAuthenticate}: AuthContentTypes) {
   });
 
   function switchAuthModeHandler() {
-    // Todo
+    replace(isLogin ? NavScreenTags.SIGNUP_SCREEN : NavScreenTags.LOGIN_SCREEN);
   }
 
   function submitHandler(credentials: UserDataTypes) {

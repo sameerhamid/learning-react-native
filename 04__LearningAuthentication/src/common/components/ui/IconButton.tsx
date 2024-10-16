@@ -1,5 +1,4 @@
-import {Pressable, StyleSheet} from 'react-native';
-// import {Ionicons} from '@expo/vector-icons';
+import {Pressable, StyleSheet, TouchableOpacity} from 'react-native';
 
 interface IconButtonTypes {
   icon: string;
@@ -9,11 +8,9 @@ interface IconButtonTypes {
 }
 function IconButton({icon, color, size, onPress}: IconButtonTypes) {
   return (
-    <Pressable
-      style={({pressed}) => [styles.button, pressed && styles.pressed]}
-      onPress={onPress}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       {/* <Ionicons name={icon} color={color} size={size} /> */}
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
@@ -23,8 +20,5 @@ const styles = StyleSheet.create({
   button: {
     margin: 8,
     borderRadius: 20,
-  },
-  pressed: {
-    opacity: 0.7,
   },
 });
