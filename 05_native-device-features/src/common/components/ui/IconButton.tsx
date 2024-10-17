@@ -9,12 +9,12 @@ import React from 'react';
 interface IconButtonPropTypes {
   imageSrc: ImageSourcePropType;
   onPress?: () => void;
-  size?: number;
+  size: number;
   color?: string;
 }
 const IconButton = ({imageSrc, onPress, size, color}: IconButtonPropTypes) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <Image
         source={imageSrc}
         style={[styles.image, {width: size, height: size, tintColor: color}]}
@@ -26,5 +26,11 @@ const IconButton = ({imageSrc, onPress, size, color}: IconButtonPropTypes) => {
 export default IconButton;
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 8,
+    margin: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   image: {},
 });
