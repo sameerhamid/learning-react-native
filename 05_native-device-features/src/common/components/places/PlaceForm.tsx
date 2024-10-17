@@ -5,7 +5,7 @@ import {Colors} from '../../constants/Colors';
 const PlaceForm = () => {
   const [enteredTitle, setEnteredTitle] = useState<string>('');
   const onTitleChageHandler = (text: string) => {
-    setEnteredTitle(enteredTitle);
+    setEnteredTitle(text);
   };
   return (
     <ScrollView showsHorizontalScrollIndicator={false} style={styles.form}>
@@ -35,10 +35,12 @@ const styles = StyleSheet.create({
   },
   input: {
     marginVertical: 8,
-    paddingHorizontal: 4,
-    paddingVertical: 8,
+
+    padding: 8,
+
     borderBottomColor: Colors.primary700,
     borderWidth: 2,
     backgroundColor: Colors.primary100,
+    fontSize: 18,
   },
 });
